@@ -12,6 +12,7 @@ import AppKit
 /// we quit (so a running bundle is never mutated), then relaunch. The bundle id
 /// is unchanged, so granted permissions follow the bundle to its new path.
 ///
+
 /// When we are already running as "Kryon.app", we instead retire a stray
 /// old-named bundle left beside us (e.g. after a manual drag-install). That path
 /// is safe by construction: the names differ, so the candidate can never be us.
