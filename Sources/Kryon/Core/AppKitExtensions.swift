@@ -16,6 +16,7 @@ extension NSScreen {
         return screens.first { $0.frame.contains(mouse) } ?? main
     }
 
+
     /// Whether this display is still plugged in. Compared by display id rather
     /// than by object identity: AppKit is free to hand out fresh NSScreen
     /// objects after a display reconfiguration, and this app sees those in
