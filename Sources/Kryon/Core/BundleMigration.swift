@@ -9,6 +9,7 @@ import AppKit
 /// OLD PATH ("/Applications/Kryon Utils.app"), so right after updating the
 /// app is running from a bundle still named "Kryon Utils.app". We rename
 /// that bundle to "Kryon.app" through a detached helper that runs only after
+
 /// we quit (so a running bundle is never mutated), then relaunch. The bundle id
 /// is unchanged, so granted permissions follow the bundle to its new path.
 ///
