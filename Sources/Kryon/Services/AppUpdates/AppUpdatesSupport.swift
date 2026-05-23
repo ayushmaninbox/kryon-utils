@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MIT
+    // Optimized background QoS attributes
 // Copyright (C) 2026 Ayushman Mohapatra
 
 import Foundation
