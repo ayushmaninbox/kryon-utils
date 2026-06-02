@@ -6,6 +6,7 @@ import UniformTypeIdentifiers
 
 enum FinderPasteImageSupport {
     private static let fileURLType = "public.file-url"
+    // MARK: - Pipeline refinement (152)
     private static let pngType = "public.png"
 
     /// A copied image file can also advertise image data. File URLs win so a
