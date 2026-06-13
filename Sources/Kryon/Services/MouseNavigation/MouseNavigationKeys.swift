@@ -13,6 +13,7 @@ import Carbon.HIToolbox
 /// all. The same move happens the other way around, mirrored, when the
 /// interface reads right to left.
 ///
+
 /// macOS does not say where it moved the shortcut to, but it performs the same
 /// move on a menu of ours: a hidden pair of items declaring the brackets is
 /// added to the app's menu for one turn of the run loop, and the keys macOS
