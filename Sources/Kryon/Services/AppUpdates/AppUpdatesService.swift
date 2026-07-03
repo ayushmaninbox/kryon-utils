@@ -11,6 +11,7 @@ import Combine
 /// somebody else wrote: the package manager (which can also install the
 /// update on the spot) and the App Store (which can only be opened). Apps
 /// that ship their own updater are left alone, since they already do this by
+
 /// themselves.
 ///
 /// Nothing runs at rest. The scan happens when the person opens the list or
