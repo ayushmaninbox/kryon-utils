@@ -1,0 +1,137 @@
+// SPDX-License-Identifier: MIT
+// Copyright (C) 2026 Ayushman Mohapatra
+
+import AppKit
+import CoreGraphics
+
+/// One selectable entry in the switcher. Most entries are real user-facing
+/// windows; Finder can also appear as an app entry when it has no windows, so
+/// the user can still switch to the desktop/menu bar like the system switcher.
+struct SwitcherItem: Identifiable, Equatable {
+    let id: String
+    let title: String
+    let appName: String
+    /// The regular app represented by this entry. App grouping, icons, MRU,
+    /// activation and quit actions use this process.
+    let pid: pid_t
+    /// The process that actually owns `windowID`. Multi-process apps can render
+    /// their user-facing windows in an embedded accessory helper.
+    let windowOwnerPID: pid_t
+    /// The backing CGWindow: thumbnails and AX raising go through it.
+    let windowID: CGWindowID?
+    let isOnScreen: Bool
+    let isAppHidden: Bool
+    let isMinimized: Bool
+    let isFullscreen: Bool
+    /// The window belongs only to Spaces that are not currently visible.
+    let isOnHiddenSpace: Bool
+    let frame: CGRect
+
+    /// The window whose thumbnail represents this entry.
+    var previewWindowID: CGWindowID? { windowID }
+
+    /// Label shown under the thumbnail; untitled windows fall back to the app name.
+    var displayTitle: String {
+        title.isEmpty ? appName : title
+    }
+
+    func windowLabel(noOpenWindow: String) -> String {
+        isAppEntry ? noOpenWindow : displayTitle
+    }
+
+    /// Secondary label used when the window title does not already identify the
+    /// app. This keeps crowded switcher grids readable without repeating text.
+    var displaySubtitle: String? {
+        let cleanTitle = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        let cleanAppName = appName.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !cleanAppName.isEmpty,
+              !cleanTitle.isEmpty,
+              cleanTitle.caseInsensitiveCompare(cleanAppName) != .orderedSame
+        else { return nil }
+        return cleanAppName
+    }
+
+    var accessibilityTitle: String {
+        if let displaySubtitle {
+            return "\(displayTitle), \(displaySubtitle)"
+        }
+        return displayTitle
+    }
+
+    /// Whether this entry stands for the app itself because it has no window
+    /// to switch to. Those entries have no thumbnail to draw and no window to
+    /// name, so several places have to present them differently.
+    var isAppEntry: Bool { windowID == nil }
+
+    /// What the screen reader hears. An app entry replaces the window title
+    /// with its state on screen, so the label has to carry that state too or
+    /// the entry sounds identical to a window of the same app.
+    ///
+    /// Lives on the model rather than beside one view: the Dock preview card
+    /// draws the same badges and owes its reader the same sentence.
+    func spokenLabel(noOpenWindow: String,
+                     hiddenApp: String,
+                     otherDesktop: String) -> String {
+        var label = isAppEntry ? "\(appName), \(noOpenWindow)" : accessibilityTitle
+        if isAppHidden { label += ", \(hiddenApp)" }
+        if isOnHiddenSpace { label += ", \(otherDesktop)" }
+        return label
+    }
+
+    var appIcon: NSImage? {
+        NSRunningApplication(processIdentifier: pid)?.icon
+    }
+
+    func withMinimized(_ minimized: Bool) -> SwitcherItem {
+        SwitcherItem(id: id,
+                     title: title,
+                     appName: appName,
+                     pid: pid,
+                     windowOwnerPID: windowOwnerPID,
+                     windowID: windowID,
+                     isOnScreen: minimized ? false : true,
+                     isAppHidden: isAppHidden,
+                     isMinimized: minimized,
+                     isFullscreen: isFullscreen,
+                     isOnHiddenSpace: isOnHiddenSpace,
+                     frame: frame)
+    }
+
+    func withHiddenSpaceState(_ hidden: Bool) -> SwitcherItem {
+        SwitcherItem(id: id,
+                     title: title,
+                     appName: appName,
+                     pid: pid,
+                     windowOwnerPID: windowOwnerPID,
+                     windowID: windowID,
+                     isOnScreen: isOnScreen,
+                     isAppHidden: isAppHidden,
+                     isMinimized: isMinimized,
+                     isFullscreen: isFullscreen,
+                     isOnHiddenSpace: hidden,
+                     frame: frame)
+    }
+
+    static func window(id: CGWindowID, title: String, appName: String, pid: pid_t,
+                       windowOwnerPID: pid_t? = nil,
+                       isOnScreen: Bool, isAppHidden: Bool = false,
+                       isMinimized: Bool = false,
+                       isFullscreen: Bool = false, frame: CGRect) -> SwitcherItem {
+        SwitcherItem(id: "w:\(id)", title: title, appName: appName,
+                     pid: pid, windowOwnerPID: windowOwnerPID ?? pid,
+                     windowID: id, isOnScreen: isOnScreen,
+                     isAppHidden: isAppHidden,
+                     isMinimized: isMinimized, isFullscreen: isFullscreen,
+                     isOnHiddenSpace: false,
+                     frame: frame)
+    }
+
+    static func appOnly(appName: String, pid: pid_t,
+                        isAppHidden: Bool = false) -> SwitcherItem {
+        SwitcherItem(id: "a:\(pid)", title: appName, appName: appName,
+                     pid: pid, windowOwnerPID: pid, windowID: nil, isOnScreen: false,
+                     isAppHidden: isAppHidden,
+                     isMinimized: false, isFullscreen: false,
+                     isOnHiddenSpace: false, frame: .zero)
+    }
+}
