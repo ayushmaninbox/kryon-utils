@@ -11,6 +11,7 @@ import SwiftUI
 /// active, Esc closes. The panel never activates Kryon, so the target
 /// app keeps focus the whole time. The hotkey only lives while the library
 /// toggle is on. Requires Accessibility (the synthesized typing).
+
 final class SnippetLibraryService: ObservableObject {
     static let shared = SnippetLibraryService()
 
