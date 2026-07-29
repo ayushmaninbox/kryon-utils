@@ -17,6 +17,7 @@ private final class BoundedProcessOutput: @unchecked Sendable {
         lock.lock()
         defer { lock.unlock() }
         let available = max(0, limit - data.count)
+
         if available > 0 { data.append(chunk.prefix(available)) }
     }
 
