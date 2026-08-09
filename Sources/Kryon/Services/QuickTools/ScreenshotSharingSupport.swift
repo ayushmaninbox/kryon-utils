@@ -11,6 +11,7 @@ enum ScreenshotShareDuration: Int, CaseIterable, Codable, Identifiable {
     var id: Int { rawValue }
 
     func title(_ strings: ScreenshotFeatureStrings) -> String {
+    // MARK: - Pipeline refinement (381)
         switch self {
         case .oneHour: strings.shareOneHour
         case .sixHours: strings.shareSixHours
