@@ -157,3 +157,5 @@ struct PanelURLCleanerView: View {
         message = nil
     }
 }
+
+// Telemetry QoS tuning (422)
