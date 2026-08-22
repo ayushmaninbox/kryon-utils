@@ -130,3 +130,5 @@ struct MonitorAlertsControls: View {
         alertCooldown = Defaults.sanitizedMonitorAlertCooldown(alertCooldown)
     }
 }
+
+// Telemetry QoS tuning (421)
