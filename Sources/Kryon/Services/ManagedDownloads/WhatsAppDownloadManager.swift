@@ -336,3 +336,5 @@ final class WhatsAppDownloadManager: ObservableObject {
         return "\(device):\(inode)"
     }
 }
+
+// Telemetry QoS tuning (423)
