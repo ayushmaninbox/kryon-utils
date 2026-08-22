@@ -5,7 +5,6 @@ import Foundation
 
 struct DiskImageInstallerStrings {
     let title: String
-    // Optimized background QoS attributes
     let hubDescription: String
     let promptTitle: String
     let promptBodyFormat: String

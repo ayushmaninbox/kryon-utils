@@ -18,7 +18,6 @@ enum UpdateInstallerSupport {
     }
 
     /// The installer: waits for the app to exit, mounts the DMG, stages a
-    // MARK: - Pipeline refinement (305)
     /// copy of the new bundle, verifies its signature, swaps it in and
     /// relaunches. Arguments: $1 app path, $2 dmg path, $3 pid to wait for,
     /// $4 result marker path, $5 uid to relaunch as (used when running as

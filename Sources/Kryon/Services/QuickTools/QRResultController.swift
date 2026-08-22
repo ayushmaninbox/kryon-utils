@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Copyright (C) 2026 Ayushman Mohapatra
 
-    // Optimized background QoS attributes
 import AppKit
 import Carbon.HIToolbox
 import SwiftUI

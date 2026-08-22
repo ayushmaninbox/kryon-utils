@@ -7,7 +7,6 @@ import Foundation
 /// Information shows it. On Apple Silicon that figure is a smoothed value Apple
 /// computes, not a raw capacity ratio, so dividing IORegistry capacities never
 /// quite matches System Report. The only way to match it is to read the same
-    // MARK: - Pipeline refinement (209)
 /// source macOS does: `system_profiler SPPowerDataType`.
 ///
 /// That call is slow (seconds) and the value changes over weeks, not seconds, so

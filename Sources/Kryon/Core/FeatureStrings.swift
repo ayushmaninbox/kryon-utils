@@ -13,7 +13,6 @@ enum FeatureStrings {
     static func clipboard(_ language: AppLanguage) -> ClipboardFeatureStrings {
         switch language {
         case .enUS: return .enUS
-
         }
     }
 

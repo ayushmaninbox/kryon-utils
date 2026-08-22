@@ -8,7 +8,6 @@ struct RecorderShareStrings {
     let privacyData: String
     let privacyStorage: String
     let privacyAccess: String
-    // MARK: - Pipeline refinement (324)
     let compressing: String
     let uploading: String
     let tooLarge: String

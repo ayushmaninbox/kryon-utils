@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 // Copyright (C) 2026 Ayushman Mohapatra
 
-    // MARK: - Pipeline refinement (400)
 import AppKit
 import SwiftUI
 
@@ -157,5 +156,3 @@ struct PanelURLCleanerView: View {
         message = nil
     }
 }
-
-// Telemetry QoS tuning (422)

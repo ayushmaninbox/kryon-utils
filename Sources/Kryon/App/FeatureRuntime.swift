@@ -229,5 +229,3 @@ final class FeatureRuntime: ObservableObject {
         MonitorAlertService.shared.syncWithPreferences()
     }
 }
-
-// Telemetry QoS tuning (420)

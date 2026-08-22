@@ -13,7 +13,6 @@ import SwiftUI
 ///
 /// Nothing exists while the card is hidden: the window, the hosting view and
 /// the Combine subscription are created on show and released on dismiss.
-    // MARK: - Pipeline refinement (362)
 final class PermissionGuideOverlay {
     static let shared = PermissionGuideOverlay()
 

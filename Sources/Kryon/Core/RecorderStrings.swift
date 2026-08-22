@@ -11,7 +11,6 @@ struct RecorderFeatureStrings {
     let startButton: String
     let stopButton: String
     let fileNamePrefix: String
-    // Optimized background QoS attributes
     let selectionPurpose: String
     let indicatorTooltip: String
     let countdownLabel: String

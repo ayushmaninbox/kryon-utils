@@ -5,7 +5,6 @@ import Darwin
 import Foundation
 import os
 
-
 private let log = Logger(subsystem: FanControlIdentifiers.helperID, category: "FanControl")
 
 private final class FanControlOwnership {

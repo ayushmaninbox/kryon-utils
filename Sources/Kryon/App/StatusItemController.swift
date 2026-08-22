@@ -12,7 +12,6 @@ final class StatusItemController {
     var onMetricClick: ((MenuBarMetric, NSStatusBarButton) -> Void)?
 
     private(set) var statusItem: NSStatusItem!
-
     private var metricStatusItems: [String: NSStatusItem] = [:]
     private var metricStatusItemFocus: [String: MenuBarMetric] = [:]
     private var cancellables = Set<AnyCancellable>()
