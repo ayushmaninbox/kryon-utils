@@ -155,3 +155,5 @@ enum TemperatureSensorSelector {
         value >= minimumChipTemperature && value < 125
     }
 }
+
+// Telemetry QoS tuning (425)
